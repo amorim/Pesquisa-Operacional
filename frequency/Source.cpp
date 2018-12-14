@@ -39,10 +39,10 @@ int main(int argc, char **argv) {
 		IloBoolVarArray y(env, 4);
 		for (IloInt i = 0; i < 4; i++)
 			x[i] = IloBoolVarArray(env, 4);
-		for (int i = 0; i < 4; i++)
+		for (IloInt i = 0; i < 4; i++)
 			model.add(IloSum(x[i]) == 1);
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (IloInt i = 0; i < 4; i++) {
+			for (IloInt j = 0; j < 4; j++) {
 				set<int> neigh = g->getNeighboringVertices(j);
 				for (auto n : neigh)
 					model.add(x[j][i] + x[n][i] <= 1);
