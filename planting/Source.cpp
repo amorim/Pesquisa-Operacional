@@ -14,7 +14,6 @@ int main(int argc, char **argv) {
 			for (IloInt j = 0; j < 3; j++)
 				q[i][j] = IloNumVar(env, 0, IloInfinity, ILOFLOAT);
 		}
-
 		IloExpr exp1(env), exp2(env), exp3(env), exp4(env), exp5(env), exp6(env), exp7(env), exp8(env), exp9(env);
 		for (IloInt i = 0; i < 3; i++) {
 			exp1 += q[i][0];
@@ -38,9 +37,7 @@ int main(int argc, char **argv) {
 		model.add(exp9 <= 350);
 		model.add(exp7 / ac[0] == exp8 / ac[1]);
 		model.add(exp8 / ac[1] == exp9 / ac[2]);
-
 		model.add(IloMaximize(env, exp1 * 5000 + exp2 * 4000 + exp3 * 1800));
-
 		IloCplex cplex(model);
 		cplex.solve();
 		env.out() << "Solution status = " << cplex.getStatus() << endl;
@@ -49,5 +46,6 @@ int main(int argc, char **argv) {
 	catch (IloException &ex) {
 		cerr << "Concert exception caught: " << ex << endl;
 	}
+	env.end();
 	return 0;
 }

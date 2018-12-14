@@ -1,20 +1,29 @@
 #include <ilcplex/ilocplex.h>
 #include <vector>
 #include <set>
-
 ILOSTLBEGIN
-
-const int F[4] = { 1, 2, 3, 4 };
 
 class Graph {
 private:
 	vector<set<int>> adjacencia;
-	int nvertices;
 
 public:
+	int nvertices;
+
 	Graph(int nvertices) {
 		this->nvertices = nvertices;
 		adjacencia.resize(nvertices);
+	}
+	Graph(string filename) {
+		ifstream file(filename);
+		int vertices;
+		file >> vertices;
+		this->nvertices = vertices;
+		adjacencia.resize(vertices);
+		int a, b;
+		while (file >> a >> b) {
+			this->addEdge(a, b);
+		}
 	}
 	void addEdge(int from, int to) {
 		adjacencia[from].insert(to);
@@ -29,27 +38,17 @@ int main(int argc, char **argv) {
 	IloEnv env;
 	try {
 		IloModel model(env);
-		Graph *g = new Graph(4);
-		g->addEdge(0, 1);
-		g->addEdge(0, 2);
-		g->addEdge(1, 2);
-		g->addEdge(1, 3);
-		g->addEdge(2, 3);
-		IloArray<IloBoolVarArray> x(env, 4);
-		IloBoolVarArray y(env, 4);
-		/*for (IloInt i = 0; i < 4; i++)
-			x[i] = IloBoolVarArray(env, 4);
-		for (IloInt i = 0; i < 4; i++)
-			model.add(IloSum(x[i]) == 1);
-		for (IloInt i = 0; i < 4; i++) {
-			for (IloInt j = 0; j < 4; j++) {
-				set<int> neigh = g->getNeighboringVertices(j);
-				for (auto n : neigh)
-					model.add(x[j][i] + x[n][i] <= 1);
-				model.add(x[j][i] <= y[i]);
+		Graph* g = new Graph("in.txt");
+		IloInt v = g->nvertices;
+		IloBoolVarArray x(env, v);
+		for (IloInt i = 0; i < v; i++) {
+			for (IloInt j = 0; j < v; j++) {
+				set<int> neigh = g->getNeighboringVertices(i);
+				if (!neigh.count(j) && i != j)
+					model.add(x[i] + x[j] <= 1);
 			}
-		}*/
-		model.add(IloMinimize(env, IloSum(y)));
+		}
+		model.add(IloMaximize(env, IloSum(x)));
 		IloCplex cplex(model);
 		cplex.solve();
 		env.out() << "Solution status = " << cplex.getStatus() << endl;

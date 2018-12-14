@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
 			bodySum += x[i] * body[i];
 		}
 		model.add(timeSum <= 400);
-		model.add(x[1] + x[3] + x[4] <= 200);
-		model.add(x[2] <= 90);
+		model.add(x[0] + x[2] + x[3] <= 200);
+		model.add(x[1] <= 90);
 		model.add(y <= lidSum / 2);
 		model.add(y <= bodySum);
 		model.add(IloMaximize(env, 50 * y - 5 * (bodySum - y) - 3 * (lidSum - 2 * y)));
@@ -31,5 +31,6 @@ int main(int argc, char **argv) {
 	catch (IloException &ex) {
 		cerr << "Concert exception caught: " << ex << endl;
 	}
+	env.end();
 	return 0;
 }

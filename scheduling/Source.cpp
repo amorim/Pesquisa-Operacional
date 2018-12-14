@@ -1,16 +1,28 @@
 #include <ilcplex/ilocplex.h>
 ILOSTLBEGIN
 
+const int d[7] = { 1, 2, 3, 4, 5, 6, 7 };
+
+IloInt wrapAround(IloInt i) {
+	if (i >= 0)
+		return i;
+	return i + 7;
+}
+
 int main(int argc, char **argv) {
 	IloEnv env;
 	try {
 		IloModel model(env);
-		IloNumVarArray x(env, 2);
-		for (IloInt i = 0; i < 2; i++)
-			x[i] = IloNumVar(env, 0.0, IloInfinity, ILOINT);
-		model.add(x[0] + 4 * x[1] <= 10000);
-		model.add(5 * x[0] + 2 * x[1] <= 30000);
-		model.add(IloMaximize(env, 11 * x[0] + 12 * x[1]));
+		IloNumVarArray x(env, 7, 0, IloInfinity, ILOINT);
+		for (IloInt i = 0; i < 7; i++) {
+			IloExpr sum(env);
+			for (IloInt j = i; j > i - 5; j--) {
+				IloInt valid = wrapAround(j);
+				sum += x[valid];
+			}
+			model.add(sum >= d[i]);
+		}
+		model.add(IloMinimize(env, IloSum(x)));
 		IloCplex cplex(model);
 		cplex.solve();
 		env.out() << "Solution status = " << cplex.getStatus() << endl;

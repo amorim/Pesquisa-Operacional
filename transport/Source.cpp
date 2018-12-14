@@ -35,5 +35,6 @@ int main(int argc, char **argv) {
 	catch (IloException &ex) {
 		cerr << "Concert exception caught: " << ex << endl;
 	}
+	env.end();
 	return 0;
 }
