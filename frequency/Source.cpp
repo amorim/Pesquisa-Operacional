@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 		g->addEdge(2, 3);
 		IloArray<IloBoolVarArray> x(env, 4);
 		IloBoolVarArray y(env, 4);
-		/*for (IloInt i = 0; i < 4; i++)
+		for (IloInt i = 0; i < 4; i++)
 			x[i] = IloBoolVarArray(env, 4);
 		for (IloInt i = 0; i < 4; i++)
 			model.add(IloSum(x[i]) == 1);
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
 					model.add(x[j][i] + x[n][i] <= 1);
 				model.add(x[j][i] <= y[i]);
 			}
-		}*/
+		}
 		model.add(IloMinimize(env, IloSum(y)));
 		IloCplex cplex(model);
 		cplex.solve();
