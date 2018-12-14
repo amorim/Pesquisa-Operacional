@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "transport", "OR1\OR1.vcxproj", "{88D4D5D2-08D0-4DDF-A6DC-15DE57C29CDD}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "feed", "feed\feed.vcxproj", "{BA052E7A-1796-4795-B5ED-A189CF417897}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "facility", "facility\facility.vcxproj", "{C1721990-E4C5-40C9-95E9-B7E39AD7169A}"
@@ -17,16 +15,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coverage", "coverage\covera
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "frequency", "frequency\frequency.vcxproj", "{1F7FABFA-A484-4619-9639-930FC99E1E5E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "transport", "transport\transport.vcxproj", "{822ECCF2-740E-4F76-8B7C-B537BC7E761E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88D4D5D2-08D0-4DDF-A6DC-15DE57C29CDD}.Debug|x64.ActiveCfg = Debug|x64
-		{88D4D5D2-08D0-4DDF-A6DC-15DE57C29CDD}.Debug|x64.Build.0 = Debug|x64
-		{88D4D5D2-08D0-4DDF-A6DC-15DE57C29CDD}.Release|x64.ActiveCfg = Release|x64
-		{88D4D5D2-08D0-4DDF-A6DC-15DE57C29CDD}.Release|x64.Build.0 = Release|x64
 		{BA052E7A-1796-4795-B5ED-A189CF417897}.Debug|x64.ActiveCfg = Debug|x64
 		{BA052E7A-1796-4795-B5ED-A189CF417897}.Debug|x64.Build.0 = Debug|x64
 		{BA052E7A-1796-4795-B5ED-A189CF417897}.Release|x64.ActiveCfg = Release|x64
@@ -51,6 +47,10 @@ Global
 		{1F7FABFA-A484-4619-9639-930FC99E1E5E}.Debug|x64.Build.0 = Debug|x64
 		{1F7FABFA-A484-4619-9639-930FC99E1E5E}.Release|x64.ActiveCfg = Release|x64
 		{1F7FABFA-A484-4619-9639-930FC99E1E5E}.Release|x64.Build.0 = Release|x64
+		{822ECCF2-740E-4F76-8B7C-B537BC7E761E}.Debug|x64.ActiveCfg = Debug|x64
+		{822ECCF2-740E-4F76-8B7C-B537BC7E761E}.Debug|x64.Build.0 = Debug|x64
+		{822ECCF2-740E-4F76-8B7C-B537BC7E761E}.Release|x64.ActiveCfg = Release|x64
+		{822ECCF2-740E-4F76-8B7C-B537BC7E761E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
